@@ -5,6 +5,7 @@ how to setup a secure expressjs site using kubernetes
 * a domain name
 * access to a kubernetes accounts
   * I'm using [civo](https://civo.com) - signup and get $250 credit (expires in 2 months)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/) client 
 
 ## instructions
 * create and connect to your cluster
