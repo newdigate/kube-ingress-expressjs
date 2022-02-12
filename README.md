@@ -17,9 +17,11 @@ how to setup a secure expressjs site using kubernetes
   > export KUBECONFIG=$(PWD)/civo-clustername-config
   ```
 * DNS setup
-  * login to your domain name service provider website and point the nameservers for your domain to your kubernetes service providers nameservers
-  * add your domain name to your kubernetes service providers DNS management 
-  * add a CNAME for a sub-domain and point the CNAME to the public IP address of your cluster
+  * login to your domain name service provider website 
+    * point the nameservers for your domain to your kubernetes service providers nameservers
+  * login to your kubernetes service provider website
+    * add your domain name to your kubernetes service providers DNS management 
+    * add a CNAME for a sub-domain and point the CNAME to the public IP address of your cluster
   
 * create an expressjs deployment
   <details> <summary>click to expand expressjs-deployment.yaml</summary>
