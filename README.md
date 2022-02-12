@@ -20,7 +20,7 @@ how to setup a secure expressjs site using kubernetes
   * add a CNAME for a sub-domain and point the CNAME to the public IP address of your cluster
   
 * create an expressjs deployment
-  <details> <summary>click to expand .yaml</summary>
+  <details> <summary>click to expand expressjs-deployment.yaml</summary>
  
   ``` yaml
   apiVersion: apps/v1
@@ -75,4 +75,34 @@ how to setup a secure expressjs site using kubernetes
         securityContext: {}
         terminationGracePeriodSeconds: 30
   ```
+ 
   </details>
+  
+  ``` sh
+  > kubectl apply -f expressjs-deployment.yaml
+  ```
+* deploy a service
+  <details> <summary>click to expand expressjs-service.yaml</summary>
+ 
+  ``` yaml
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: expressjs
+  spec:
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: expressjs
+    sessionAffinity: None
+    type: ClusterIP
+  ```
+ 
+  </details>
+  
+  ```
+  > kubectl apply -f expressjs-service.yaml
+  ```
