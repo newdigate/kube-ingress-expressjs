@@ -9,7 +9,7 @@ how to setup a secure expressjs site using kubernetes
 ## instructions
 * create and connect to your cluster
   * in your kubernetes service provider website, create a new cluster
-  * in [civo](https://civo.com), when creating the new cluster, you can specify [cert-manager](https://cert-manager.io/docs/) to be installed under applications > architecture 
+    * in [civo](https://civo.com), when creating the new cluster, you can specify [cert-manager](https://cert-manager.io/docs/) to be installed under applications > architecture 
   * download the kubernetes config for the new cluster (store it securely)
   * copy to ~/.kube/config or local development working path and set environment variable KUBECONFIG
   ```
