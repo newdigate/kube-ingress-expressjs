@@ -25,7 +25,7 @@ how to setup a secure expressjs site using kubernetes
     * add a CNAME for a sub-domain and point the CNAME to the public IP address of your cluster
   
 * create an expressjs **deployment**
-  * using alexellis2/service:0.3.5 container image to deploy a simple nodejs application webapp using expressjs  
+  * using `alexellis2/service:0.3.5` container image to deploy a simple nodejs application webapp using expressjs  
     <details> <summary>click to expand expressjs-deployment.yaml</summary>
 
     ``` yaml
