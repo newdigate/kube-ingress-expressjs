@@ -26,61 +26,61 @@ how to setup a secure expressjs site using kubernetes
   
 * create an expressjs **deployment**
   * using alexellis2/service:0.3.5 container image to deploy a simple nodejs application webapp using expressjs  
-  <details> <summary>click to expand expressjs-deployment.yaml</summary>
+    <details> <summary>click to expand expressjs-deployment.yaml</summary>
 
-  ``` yaml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    generation: 1
-    name: expressjs
-    labels:
-     app: expressjs
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
-        app: expressjs
-    strategy:
-      rollingUpdate:
-        maxSurge: 1
-        maxUnavailable: 0
-      type: RollingUpdate
-    template:
-      metadata:
-        name: expressjs
-        labels:
+    ``` yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      generation: 1
+      name: expressjs
+      labels:
+       app: expressjs
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
           app: expressjs
-      spec:
-        containers:
-        - name: expressjs
-          image: alexellis2/service:0.3.5
-          imagePullPolicy: Always
-          resources:
-            limits:
-              cpu: 50m
-              memory: 128Mi
-            requests:
-              cpu: 50m
-              memory: 128Mi
-          ports:
-          - containerPort: 8080
-            protocol: TCP
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /health
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 2
-            periodSeconds: 2
-            successThreshold: 1
-            timeoutSeconds: 1
-        dnsPolicy: ClusterFirst
-        restartPolicy: Always
-        securityContext: {}
-        terminationGracePeriodSeconds: 30
-  ```
+      strategy:
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+        type: RollingUpdate
+      template:
+        metadata:
+          name: expressjs
+          labels:
+            app: expressjs
+        spec:
+          containers:
+          - name: expressjs
+            image: alexellis2/service:0.3.5
+            imagePullPolicy: Always
+            resources:
+              limits:
+                cpu: 50m
+                memory: 128Mi
+              requests:
+                cpu: 50m
+                memory: 128Mi
+            ports:
+            - containerPort: 8080
+              protocol: TCP
+            readinessProbe:
+              failureThreshold: 3
+              httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+              initialDelaySeconds: 2
+              periodSeconds: 2
+              successThreshold: 1
+              timeoutSeconds: 1
+          dnsPolicy: ClusterFirst
+          restartPolicy: Always
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    ```
  
   </details>
   
