@@ -8,11 +8,18 @@ you will need:
   * I'm using [civo](https://civo.com) - signup and get $250 credit (expires in 2 months)
 
 ## instructions
-* create a new cluster in kubernetes
-* point your domain name to your cloud provider
-  * point your domain's nameservers to your kubernetes providers nameservers
-  * add your domain name to your cloud providers DNS management 
+* create and connect to your cluster
+  * create a new cluster
+  * download the kubernetes config for the new cluster (store it securely)
+  * copy to ~/.kube/config or local development working path and set environment variable KUBECONFIG
+  ```
+  > export KUBECONFIG=$(PWD)/civo-clustername-config
+  ```
+* DNS setup
+  * login to your domain name providers website and point the nameservers for your domain to your kubernetes service providers nameservers
+  * add your domain name to your kubernetes service providers DNS management 
   * add a CNAME for a sub-domain and point the CNAME to the public IP address of your cluster
+  
 * create an expressjs deployment
   <details> <summary>click to expand .yaml</summary>
  
