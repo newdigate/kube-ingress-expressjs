@@ -25,8 +25,9 @@ how to setup a secure expressjs site using kubernetes
     * add a CNAME for a sub-domain and point the CNAME to the public IP address of your cluster
   
 * create an expressjs **deployment**
+  * using alexellis2/service:0.3.5 container image to deploy a simple nodejs application webapp using expressjs  
   <details> <summary>click to expand expressjs-deployment.yaml</summary>
- 
+
   ``` yaml
   apiVersion: apps/v1
   kind: Deployment
@@ -140,35 +141,37 @@ how to setup a secure expressjs site using kubernetes
   ```
   
  * create an **ingress**
-   <details> <summary>click to expand expressjs-ingress.yaml</summary>
+   * replace `expressjs.example.com` and `wildcard-example-com-tls` with your own domain name 
  
-    ``` yaml
-    apiVersion: networking.k8s.io/v1
-    kind: Ingress
-    metadata:
-      name: express
-      annotations:
-        cert-manager.io/issuer: letsencrypt-prod
-        kubernetes.io/ingress.class: "traefik"
-    spec:
-      tls:
-      - hosts:
-        - expressjs.moolet.me
-        secretName: wildcard-moolet-me-tls
-      rules:
-      - host: "expressjs.moolet.me"
-        http:
-          paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: expressjs
-                port:
-                  number: 8080
-    ```
+      <details> <summary>click to expand expressjs-ingress.yaml</summary>
 
-   </details>
+     ``` yaml
+     apiVersion: networking.k8s.io/v1
+     kind: Ingress
+     metadata:
+       name: express
+       annotations:
+         cert-manager.io/issuer: letsencrypt-prod
+         kubernetes.io/ingress.class: "traefik"
+     spec:
+       tls:
+       - hosts:
+         - expressjs.example.com
+         secretName: wildcard-example-com-tls
+       rules:
+       - host: "expressjs.example.com"
+         http:
+           paths:
+           - pathType: Prefix
+             path: "/"
+             backend:
+               service:
+                 name: expressjs
+                 port:
+                   number: 8080
+     ```
+
+    </details>
   
     ``` sh
     > kubectl apply -f expressjs-ingress.yaml
