@@ -5,12 +5,27 @@ how to setup an https expressjs site
 you will need:
 * a domain name
   * [name.com](http://name.com/)
-* a publicly accessable kubernetes cluster
+* access to a kubernetes accounts
   * [civo](https://civo.com)
   * [linode](https://linode.com) 
 
-## pre-requisites
-* create an expressjs deployment
+## instructions
+<details> <summary>point your domain's nameservers to your kubernetes providers nameservers </summary>
+
+     <details> <summary> for <a href='https://civo.com'>civo</a> </summary>
+
+       ```
+       ns0.civo.com
+       ns1.civo.com
+       ```
+      
+     </details>
+ 
+</details>
+
+2. create an expressjs deployment
+<details>
+ 
 ``` yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -64,3 +79,4 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
 ```
+</details>
