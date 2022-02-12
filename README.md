@@ -1,5 +1,5 @@
 # kube-ingress-expressjs
-how to setup an https expressjs site
+how to setup an https expressjs site using kubernetes
 
 ## pre-requisites
 you will need:
