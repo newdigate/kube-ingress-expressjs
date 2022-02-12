@@ -1,5 +1,5 @@
 # creating a secure website 
-how to setup an https expressjs site using kubernetes
+how to setup a secure expressjs site using kubernetes
 
 ## pre-requisites
 you will need:
