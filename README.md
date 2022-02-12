@@ -2,7 +2,6 @@
 how to setup a secure expressjs site using kubernetes
 
 ## pre-requisites
-you will need:
 * a domain name
 * access to a kubernetes accounts
   * I'm using [civo](https://civo.com) - signup and get $250 credit (expires in 2 months)
