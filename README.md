@@ -85,6 +85,7 @@ how to setup a secure expressjs site using kubernetes
   ``` sh
   > kubectl apply -f expressjs-deployment.yaml
   ```
+  
 * deploy a service
   <details> <summary>click to expand expressjs-service.yaml</summary>
  
@@ -107,6 +108,67 @@ how to setup a secure expressjs site using kubernetes
  
   </details>
   
-  ```
+  ``` sh
   > kubectl apply -f expressjs-service.yaml
+  ```
+  
+* create an issuer
+  <details> <summary>click to expand expressjs-issuer.yaml</summary>
+ 
+  ``` yaml
+  apiVersion: cert-manager.io/v1
+  kind: Issuer
+  metadata:
+    name: letsencrypt-prod
+  spec:
+    acme:
+      email: name@gmail.com
+      server: https://acme-v02.api.letsencrypt.org/directory
+      privateKeySecretRef:
+        name: expressjs-secret-issuer-account-key
+      solvers:
+      - http01:
+          ingress:
+            class: traefik
+   ```
+
+   </details>
+  
+  ``` sh
+  > kubectl apply -f expressjs-issuer.yaml
+  ```
+  
+ * create an ingress
+  <details> <summary>click to expand expressjs-ingress.yaml</summary>
+ 
+  ``` yaml
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: express
+    annotations:
+      cert-manager.io/issuer: letsencrypt-prod
+      kubernetes.io/ingress.class: "traefik"
+  spec:
+    tls:
+    - hosts:
+      - expressjs.moolet.me
+      secretName: wildcard-moolet-me-tls
+    rules:
+    - host: "expressjs.moolet.me"
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: expressjs
+              port:
+                number: 8080
+   ```
+
+   </details>
+  
+  ``` sh
+  > kubectl apply -f expressjs-ingress.yaml
   ```
